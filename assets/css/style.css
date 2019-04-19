@@ -1,3 +1,16 @@
 #more{
     display: none;
 }
+#theGifs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+  align-content: flex-end;
+}
+.card{
+    border: 2px solid black;
+    flex: 0 1 32%;
+}

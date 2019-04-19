@@ -14,33 +14,20 @@ $('button').click(function(){
     }).then(function(response) {
       console.log(response);
       for (i=0; i<response.data.length; i++){
-      var picture=response.data[i].images.original.url;
-      var movingPicture = $("<img>");
+        picture=response.data[i].images.fixed_height.url;
+        var $card = $('<div class=card>');
+        var movingPicture = $("<img>");
           movingPicture.attr("src", picture);
           movingPicture.attr("alt", response.data[i].title);
-          $("#theGifs").append(movingPicture);
+          $card.append(movingPicture);
+          $card.append('<div class=rating>' + response.data[i].rating + '</div>');
+        $('#theGifs').append($card);
+        
       }
       $('#more').show();
       offset+=10;
     })});
 
-   /* $('#more').click(function(){
-      $.ajax({
-        url: queryURL +'&offset=' + offset,
-        method: "GET"
-      }).then(function(response) {
-        for (i=0; i<response.data.length; i++){
-        var picture=response.data[i].images.original.url;
-        var morePictures = $("<img>");
-            morePictures.attr("src", picture);
-            morePictures.attr("alt", response.data[i].title);
-            $("#theGifs").append(morePictures);
-        }
-        offset+=10;
-        console.log(offset);
-        $('#more').show();
-    })});
-*/
     function searching(clicked){
       if ($(clicked.currentTarget).hasClass('coolStuff')){
       $('#theGifs').empty();
@@ -48,7 +35,3 @@ $('button').click(function(){
       searchBy = $(clicked.currentTarget).attr('id');
     }}
 ; 
-    
-
-
-     
