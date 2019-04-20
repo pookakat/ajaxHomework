@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Giphy Bonanza</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
-    <button id="pirates" class="coolStuff">Pirates</button>
-    <button id="dressage" class="coolStuff">Dressage</button>
-    <button id="dragons" class="coolStuff">Dragons</button>
-    <div id="theGifs"></div>
-    <button id="more">Show More?</button>
+    <div id="titleStuff">
+    <h1> Cool Stuff Gif Bonanaza!</h1>
+    <h2> This is dedicated to all the cool stuff I know</h2>
+    </div>
+    <div id="favorites" class="flexSettings">
+        <p>Past Favorites:</p>
+    </div>
+    <div id="suggestions">
+        <h2>Did I miss something?</h2>
+        <form id="suggestion">
+            Suggest it! :<input type="text" name="userSuggestion" id="addedButton">
+            <input type="submit" value="Submit!">
+        </form>
+    </div>
+    <div id="theButtons" class="button-container">
+    </div>
+    <div id="theGifs" class="flexSettings"></div>
+    <div class="button-container">
+        <button id="more">Show More?</button>
+    </div>
     <script
         src="https://code.jquery.com/jquery-3.4.0.min.js"
         integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="

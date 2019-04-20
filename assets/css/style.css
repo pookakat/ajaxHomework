@@ -1,8 +1,21 @@
-#more{
-    display: none;
+#titleStuff{
+  text-align: center;
 }
-#theGifs{
-  display: flex;
+
+#more{
+  display: none;
+}
+
+#theButtons{
+  margin: auto;
+  padding: 10px;
+}
+
+#favorites{
+  display: none;
+}
+
+.flexSettings{
   align-items: center;
   justify-content: center;
   flex-direction: row;
@@ -10,7 +23,30 @@
   flex-flow: row wrap;
   align-content: flex-end;
 }
+
+#suggestions{
+  text-align: right;
+  padding: 20px;
+}
+.coolStuff{
+
+}
+
+#theGifs{
+  display: flex;
+}
+
 .card{
     border: 2px solid black;
     flex: 0 1 32%;
+}
+
+img{
+  margin: auto;
+  display: block;
+}
+
+.rating{
+  border-top: 4px solid black;
+  text-align: center;
 }
