@@ -14,8 +14,7 @@ $('document').ready(function(){
 function oldFavorites(){
   var oldJsonArray = localStorage.getItem('pastFavorites')
   oldJsonArray = JSON.parse(oldJsonArray);
-  console.log(oldJsonArray);
-  if (oldJsonArray != []){
+  if (oldJsonArray != null){
     favorites = oldJsonArray;
     console.log(favorites);
     favoritesBox();
@@ -110,6 +109,7 @@ $('.button-container').on('click', 'button', function(event){
     $('#theGifs').on('click', ".favorite", function(event){
       event.preventDefault();
       newFavorite=$(this).parent().attr('id');
+      console.log(favorites);
       favorites.push('' + newFavorite + '');
       favoritesBox();
     })
