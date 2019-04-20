@@ -54,7 +54,7 @@ img{
   color: gold;
 }
 
-@media only screen and (max-device-width: 480px){
+@media only screen and (max-device-width: 700px){
   #suggestions{
     text-align: center;
   }
