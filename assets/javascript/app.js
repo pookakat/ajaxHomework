@@ -4,16 +4,64 @@ var offset=0;
 var searchBy="";
 var queryURL="";
 var topics=["pirates", "dressage", "dragons", "horses", "tigers", "firefly", "princess bride"];
+var favorites=[];
 
 $('document').ready(function(){
   makeButtons(topics);
+  oldFavorites();
 });
+
+function oldFavorites(){
+  var oldJsonArray = localStorage.getItem('pastFavorites')
+  oldJsonArray = JSON.parse(oldJsonArray);
+  console.log(oldJsonArray);
+  if (oldJsonArray != []){
+    favorites = oldJsonArray;
+    console.log(favorites);
+    favoritesBox();
+  }
+  return;
+}
 
 function makeButtons(topics){
   for (buttonCount = 0; buttonCount < topics.length; buttonCount++){
     $('#theButtons').append(`<button id='${topics[buttonCount]}' class="coolStuff">${topics[buttonCount]}</button>`);
   }
 }
+
+function favoritesBox(){
+  console.log(favorites);
+  var jsonArray =  JSON.stringify(favorites);
+  console.log(jsonArray, typeof jsonArray);
+  localStorage.setItem('pastFavorites', jsonArray);
+  $('#past').show();
+  $('#favorites').addClass('flexSettings');
+  $('#favorites').empty();
+  for (faveCount=0; faveCount<favorites.length; faveCount++){ 
+    queryURL= "https://api.giphy.com/v1/gifs/" + favorites[faveCount] + "?api_key=" + apiKey;
+    console.log(queryURL);
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      picture=response.data.images.fixed_height_still.url;
+      animation=response.data.images.fixed_height.url;
+        var $card = $('<div class=card>');
+        var movingPicture = $("<img>");
+          movingPicture.attr("src", picture);
+          movingPicture.attr("alt", response.data.title);
+          movingPicture.attr("animation", animation);
+          movingPicture.attr("still", picture);
+          movingPicture.attr("state", "still");
+          $card.append(movingPicture);
+          $card.append('<div class="title cardText"> Title: ' + response.data.title + '<div>');
+          $card.append('<div class="rating cardText"> Rated: ' + response.data.rating.toUpperCase() + '</div>');
+          $card.attr('id', response.data.id);
+          $('#favorites').append($card);
+    });
+  };
+};
+
 
 $('.button-container').on('click', 'button', function(event){
   event.preventDefault();
@@ -34,7 +82,10 @@ $('.button-container').on('click', 'button', function(event){
           movingPicture.attr("still", picture);
           movingPicture.attr("state", "still");
           $card.append(movingPicture);
-          $card.append('<div class=rating>' + response.data[i].rating.toUpperCase() + '</div>');
+          $card.append('<div class="title cardText"> Title: ' + response.data[i].title + '<div>');
+          $card.append('<div class="rating cardText"> Rated: ' + response.data[i].rating.toUpperCase() + '</div>');
+          $card.append('<div class="favorite cardText">Favorite This<div>');
+          $card.append()
           $card.attr('id', response.data[i].id);
         $('#theGifs').append($card);
         
@@ -43,19 +94,25 @@ $('.button-container').on('click', 'button', function(event){
       offset+=10;
     })});
 
-    $('#theGifs').on('click', '.card', function(event){
+    $('.gifContainer').on('click', 'img', function(event){
       event.preventDefault();
-      var cardState = $(event.target, 'img').attr('state');
-      console.log(cardState);
+      var cardState = $(this).attr('state');
       if (cardState === 'still'){
-        $(event.target, 'img').attr('src', $(event.target, 'img').attr('animation'));
-        $(event.target, 'img').attr('state', 'moving');
+        $(this).attr('src', $(this).attr('animation'));
+        $(this).attr('state', 'moving');
       }
       else{
-        $(event.target, 'img').attr('src', $(event.target, 'img').attr('still'));
-        $(event.target, 'img').attr('state', 'still');
+        $(this).attr('src', $(this).attr('still'));
+        $(this).attr('state', 'still');
       }
     });
+
+    $('#theGifs').on('click', ".favorite", function(event){
+      event.preventDefault();
+      newFavorite=$(this).parent().attr('id');
+      favorites.push('' + newFavorite + '');
+      favoritesBox();
+    })
 
     $('#suggestion').submit(function(event){
       event.preventDefault();
@@ -71,5 +128,4 @@ $('.button-container').on('click', 'button', function(event){
       $('#theGifs').empty();
       offset=0;
       searchBy = $(clicked.target).attr('id');
-    }}
-; 
+    }};

@@ -11,11 +11,12 @@
   padding: 10px;
 }
 
-#favorites{
+#past{
   display: none;
 }
 
 .flexSettings{
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
@@ -33,7 +34,7 @@
 }
 
 #theGifs{
-  display: flex;
+  
 }
 
 .card{
@@ -46,7 +47,16 @@ img{
   display: block;
 }
 
-.rating{
-  border-top: 4px solid black;
+.cardText{
+  border-top: 2px solid black;
   text-align: center;
+}
+
+.favorite{
+  font-family: Arial, Helvetica, sans-serif;
+  color: blue;
+}
+
+.favorite:hover{
+  color: gold;
 }
