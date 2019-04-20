@@ -29,13 +29,6 @@
   text-align: right;
   padding: 20px;
 }
-.coolStuff{
-
-}
-
-#theGifs{
-  
-}
 
 .card{
     border: 2px solid black;
@@ -59,4 +52,18 @@ img{
 
 .favorite:hover{
   color: gold;
+}
+
+@media only screen and (max-device-width: 480px){
+  #suggestions{
+    text-align: center;
+  }
+  .flexSettings{
+    flex-direction: column;
+    flex-flow: default;
+    align-content: center;
+  }
+  .card{
+    width: 97%;
+  }
 }
