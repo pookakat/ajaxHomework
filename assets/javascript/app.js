@@ -16,7 +16,6 @@ function oldFavorites(){
   oldJsonArray = JSON.parse(oldJsonArray);
   if (oldJsonArray != null){
     favorites = oldJsonArray;
-    console.log(favorites);
     favoritesBox();
   }
   return;
@@ -29,16 +28,13 @@ function makeButtons(topics){
 }
 
 function favoritesBox(){
-  console.log(favorites);
   var jsonArray =  JSON.stringify(favorites);
-  console.log(jsonArray, typeof jsonArray);
   localStorage.setItem('pastFavorites', jsonArray);
   $('#past').show();
   $('#favorites').addClass('flexSettings');
   $('#favorites').empty();
   for (faveCount=0; faveCount<favorites.length; faveCount++){ 
     queryURL= "https://api.giphy.com/v1/gifs/" + favorites[faveCount] + "?api_key=" + apiKey;
-    console.log(queryURL);
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -109,7 +105,6 @@ $('.button-container').on('click', 'button', function(event){
     $('#theGifs').on('click', ".favorite", function(event){
       event.preventDefault();
       newFavorite=$(this).parent().attr('id');
-      console.log(favorites);
       favorites.push('' + newFavorite + '');
       favoritesBox();
     })
