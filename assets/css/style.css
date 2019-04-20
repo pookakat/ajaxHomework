@@ -66,4 +66,7 @@ img{
   .card{
     width: 97%;
   }
+  img{
+    width: 100%;
+  }
 }
